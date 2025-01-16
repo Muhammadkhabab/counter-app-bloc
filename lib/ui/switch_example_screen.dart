@@ -35,7 +35,9 @@ class _SwitchExampleScreenState extends State<SwitchExampleScreen> {
               children: [
                 Text('Notification'),
                 BlocBuilder<SwitchBloc, SwitchStates>(
+                  buildWhen: (previous, current) => previous.isSwitch != current.isSwitch,
                   builder: (context, state) {
+                    print('switch build');
                     return Switch(
                       value: state.isSwitch,
                       onChanged: (value) {
@@ -47,7 +49,9 @@ class _SwitchExampleScreenState extends State<SwitchExampleScreen> {
               ],
             ),
             BlocBuilder<SwitchBloc, SwitchStates>(
+              buildWhen: (previous, current) => previous.sliderValue != current.sliderValue,
               builder: (context, state) {
+                print('container build');
                 return Container(
                   width: double.infinity,
                   height: 100,
@@ -59,6 +63,7 @@ class _SwitchExampleScreenState extends State<SwitchExampleScreen> {
               },
             ),
             BlocBuilder<SwitchBloc, SwitchStates>(
+              buildWhen: (previous, current) => previous.sliderValue != current.sliderValue,
               builder: (context, state) {
                 return Slider(
                   value: state.sliderValue,
