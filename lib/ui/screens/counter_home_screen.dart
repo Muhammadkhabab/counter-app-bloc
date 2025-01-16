@@ -1,10 +1,10 @@
 import 'package:bloc_counter_app/bloc/counter_bloc/counter_bloc.dart';
 import 'package:bloc_counter_app/bloc/counter_bloc/counter_state.dart';
-import 'package:bloc_counter_app/ui/switch_example_screen.dart';
+import 'package:bloc_counter_app/ui/screens/switch_example_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/counter_bloc/counter_event.dart';
+import '../../bloc/counter_bloc/counter_event.dart';
 
 class CounterHomeScreen extends StatefulWidget {
   const CounterHomeScreen({super.key});
@@ -18,6 +18,7 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Counter App',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -52,12 +53,6 @@ class _CounterHomeScreenState extends State<CounterHomeScreen> {
                 child: Text('Increment Number'),
               ),
             ],
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SwitchExampleScreen()));
-            },
-            child: Text('Switch'),
           ),
         ],
       ),

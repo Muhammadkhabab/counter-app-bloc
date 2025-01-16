@@ -11,8 +11,8 @@ class EnableOrDisableNotifications extends SwitchEvent {}
 
 //this is the slider event
 class SliderEvent extends SwitchEvent {
-  double slider;
-  SliderEvent({required this.slider});
+  final double slider;
+  const SliderEvent({required this.slider});
 
   @override
   List<Object?> get props => [slider];
