@@ -15,19 +15,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CounterBloc(),
-      child: BlocProvider(
-        create: (_) => SwitchBloc(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Bloc Counter App',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: CounterHomeScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => CounterBloc()),
+        BlocProvider(create: (_) => SwitchBloc()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Bloc Counter App',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
         ),
+        home: CounterHomeScreen(),
       ),
     );
   }
