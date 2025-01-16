@@ -10,4 +10,5 @@ abstract class CounterEvent extends Equatable {
 //this is the abstract sub class
 class IncrementCounter extends CounterEvent {}
 
+//this is the abstract sub class
 class DecrementCounter extends CounterEvent {}
