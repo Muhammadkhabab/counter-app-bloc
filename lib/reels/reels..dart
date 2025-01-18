@@ -257,7 +257,9 @@ class _ReelsAppState extends State<ReelsApp> {
                             Column(
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    //todo: share implementation
+                                  },
                                   icon: const Icon(
                                     Icons.share,
                                     color: Colors.white,
@@ -280,9 +282,12 @@ class _ReelsAppState extends State<ReelsApp> {
                             Column(
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    //todo: change into the savoing option
+                                    // false ? Icons.bookmark : Icons.bookmark_border,
+                                  },
                                   icon: const Icon(
-                                    false ? Icons.bookmark : Icons.bookmark_border,
+                                    Icons.bookmark_outline,
                                     color: Colors.white,
                                   ),
                                   color: Colors.white,
@@ -387,8 +392,10 @@ class _ReelsAppState extends State<ReelsApp> {
 }
 
 class CommentSection extends StatefulWidget {
+  const CommentSection({super.key});
+
   @override
-  _CommentSectionState createState() => _CommentSectionState();
+  State<CommentSection> createState() => _CommentSectionState();
 }
 
 class _CommentSectionState extends State<CommentSection> {
