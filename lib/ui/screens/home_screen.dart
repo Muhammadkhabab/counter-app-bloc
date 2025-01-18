@@ -1,3 +1,4 @@
+import 'package:bloc_counter_app/reels/reels..dart';
 import 'package:bloc_counter_app/ui/screens/counter_home_screen.dart';
 import 'package:bloc_counter_app/ui/screens/switch_example_screen.dart';
 import 'package:flutter/material.dart';
@@ -60,9 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SwitchExampleScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ReelsApp()));
                 },
-                child: Text('Next'),
+                child: Text('Reels'),
               ),
             ],
           )
