@@ -1,7 +1,7 @@
 import 'package:bloc_counter_app/bloc/counter_bloc/counter_bloc.dart';
 import 'package:bloc_counter_app/bloc/image_picker_bloc/image_picker_bloc.dart';
 import 'package:bloc_counter_app/bloc/reels_bloc/reels_bloc.dart';
-import 'package:bloc_counter_app/ui/screens/counter_home_screen.dart';
+import 'package:bloc_counter_app/bloc/todo/todo_bloc.dart';
 import 'package:bloc_counter_app/ui/screens/home_screen.dart';
 import 'package:bloc_counter_app/utlis/image_picker_utlis/image_picker_utlis.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SwitchBloc()),
         BlocProvider(create: (_) => ImagePickerBloc(ImagePickerUtlis())),
         BlocProvider(create: (_) => ReelsBloc()),
+        BlocProvider(create: (_) => TodoBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
