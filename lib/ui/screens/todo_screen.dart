@@ -112,6 +112,7 @@ class _TodoScreenState extends State<TodoScreen> {
               ),
             ],
           ),
+          alignment: Alignment.center,
           actions: [
             TextButton(
               onPressed: () {
@@ -130,7 +131,7 @@ class _TodoScreenState extends State<TodoScreen> {
                 context.read<TodoBloc>().add(AddTodoEvent(todo: todo));
                 Navigator.of(context).pop();
               },
-              child: Text('Add'),
+              child: Text('Add Todo'),
             ),
           ],
         );
