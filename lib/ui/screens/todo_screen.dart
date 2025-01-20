@@ -28,50 +28,60 @@ class _TodoScreenState extends State<TodoScreen> {
       ),
       body: BlocBuilder<TodoBloc, TodoState>(
         builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: state.todos.length,
-                  itemBuilder: (context, index) {
-                    final todo = state.todos[index];
-                    return ListTile(
-                      title: Text(
-                        todo.tittle,
-                        style: TextStyle(
-                          decoration: todo.isDone ? TextDecoration.lineThrough : null,
+          if (state.todos.isEmpty) {
+            return Center(
+              child: Text('No Todos Found'),
+            );
+          } else if (state.todos.isNotEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: state.todos.length,
+                    itemBuilder: (context, index) {
+                      final todo = state.todos[index];
+                      return ListTile(
+                        title: Text(
+                          todo.tittle,
+                          style: TextStyle(
+                            decoration: todo.isDone ? TextDecoration.lineThrough : null,
+                          ),
                         ),
-                      ),
-                      subtitle: Text(todo.description),
-                      leading: CircleAvatar(
-                        child: Text(todo.index.toString()),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Checkbox(
-                            value: todo.isDone,
-                            onChanged: (_) {
-                              context.read<TodoBloc>().add(UpdateTodoEvent(todo: todo));
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () {
-                              context.read<TodoBloc>().add(RemoveTodoEvent(todo: todo));
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                        subtitle: Text(todo.description),
+                        leading: CircleAvatar(
+                          child: Text(todo.index.toString()),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Checkbox(
+                              value: todo.isDone,
+                              onChanged: (_) {
+                                context.read<TodoBloc>().add(UpdateTodoEvent(todo: todo));
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                context.read<TodoBloc>().add(RemoveTodoEvent(todo: todo));
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          );
+              ],
+            );
+          } else {
+            return Center(
+              child: Text('Something went wrong'),
+            );
+          }
         },
       ),
       floatingActionButton: FloatingActionButton(
