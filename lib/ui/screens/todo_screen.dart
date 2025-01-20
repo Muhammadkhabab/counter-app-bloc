@@ -112,6 +112,7 @@ class _TodoScreenState extends State<TodoScreen> {
               ),
             ],
           ),
+          actionsAlignment: MainAxisAlignment.center,
           alignment: Alignment.center,
           actions: [
             TextButton(
