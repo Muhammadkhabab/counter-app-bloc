@@ -1,6 +1,7 @@
 import 'package:bloc_counter_app/reels/reels..dart';
 import 'package:bloc_counter_app/ui/screens/counter_home_screen.dart';
 import 'package:bloc_counter_app/ui/screens/switch_example_screen.dart';
+import 'package:bloc_counter_app/ui/screens/todo_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'image_picker_screen.dart';
@@ -64,6 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ReelsApp()));
                 },
                 child: Text('Reels'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => TodoScreen()));
+                },
+                child: Text('To do Screen'),
               ),
             ],
           )
