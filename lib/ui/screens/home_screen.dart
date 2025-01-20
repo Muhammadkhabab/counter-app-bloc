@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    //todo: favorrite app must to impment through bloc model repsotiroy
     return Scaffold(
       appBar: AppBar(
         title: Text(

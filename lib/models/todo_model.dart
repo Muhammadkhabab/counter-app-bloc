@@ -13,6 +13,7 @@ class TodoModel extends Equatable {
     required this.isDone,
   });
 
+  // To create a instance of the model which will be used to update the state and modified the list of todos
   TodoModel copyWith({String? tittle, String? description, int? index, bool? isDone}) {
     return TodoModel(
       tittle: tittle ?? this.tittle,
