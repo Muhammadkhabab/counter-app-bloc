@@ -13,6 +13,7 @@ class FavoriteModel extends Equatable {
     this.isDeleted = false,
   });
 
+  //the copy with metho use for the the create the new object with the new value.
   FavoriteModel copyWith({String? id, String? value, bool? isFavorite, bool? isDeleted}) {
     return FavoriteModel(
       id: id ?? this.id,
