@@ -145,72 +145,73 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               },
             ),
           ),
-          BlocBuilder<FavoriteBloc, FavoriteState>(builder: (context, state) {
-            if (state.listStatus == ListStatus.loading) {
-              return SliverFillRemaining(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            } else if (state.listStatus == ListStatus.success) {
-              return SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final favoriteItems = state.favoriteModel[index];
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      elevation: 2,
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.all(16),
-                        leading: Checkbox(
-                          value: state.temporaryList.contains(state.favoriteModel[index]) ? true : false,
-                          onChanged: (bool? value) {
-                            FavoriteModel item = state.favoriteModel[index];
-                            if (value!) {
-                              context.read<FavoriteBloc>().add(SelectItem(item: item));
-                            } else {
-                              context.read<FavoriteBloc>().add(UnSelectItem(item: item));
-                            }
-                          },
-                        ),
-                        title: Text(
-                          favoriteItems.value,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+          BlocBuilder<FavoriteBloc, FavoriteState>(
+            builder: (context, state) {
+              switch (state.listStatus) {
+                case ListStatus.loading:
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                case ListStatus.error:
+                  return SliverFillRemaining(
+                    child: Center(
+                      child: Text('Error loading favorites'),
+                    ),
+                  );
+                case ListStatus.success:
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final favoriteItems = state.favoriteModel[index];
+                        return Card(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
                           ),
-                        ),
-                        trailing: IconButton(
-                          icon: Icon(
-                            state.favoriteModel[index].isFavorite ? Icons.favorite : Icons.favorite_outline,
-                            color: state.favoriteModel[index].isFavorite ? Colors.red : Colors.black,
+                          elevation: 2,
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.all(16),
+                            leading: Checkbox(
+                              value: state.temporaryList.contains(state.favoriteModel[index]) ? true : false,
+                              onChanged: (bool? value) {
+                                FavoriteModel item = state.favoriteModel[index];
+                                if (value!) {
+                                  context.read<FavoriteBloc>().add(SelectItem(item: item));
+                                } else {
+                                  context.read<FavoriteBloc>().add(UnSelectItem(item: item));
+                                }
+                              },
+                            ),
+                            title: Text(
+                              favoriteItems.value,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            trailing: IconButton(
+                              icon: Icon(
+                                state.favoriteModel[index].isFavorite ? Icons.favorite : Icons.favorite_outline,
+                                color: state.favoriteModel[index].isFavorite ? Colors.red : Colors.black,
+                              ),
+                              onPressed: () {
+                                FavoriteModel item = state.favoriteModel[index];
+                                context.read<FavoriteBloc>().add(
+                                      AddFavorite(
+                                        favoriteItem: FavoriteModel(id: item.id, value: item.value, isFavorite: item.isFavorite ? false : true),
+                                      ),
+                                    );
+                              },
+                            ),
                           ),
-                          onPressed: () {
-                            FavoriteModel item = state.favoriteModel[index];
-                            context.read<FavoriteBloc>().add(
-                                  AddFavorite(
-                                    favoriteItem: FavoriteModel(id: item.id, value: item.value, isFavorite: item.isFavorite ? false : true),
-                                  ),
-                                );
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                  childCount: state.favoriteModel.length,
-                ),
-              );
-            } else {
-              return SliverFillRemaining(
-                child: Center(
-                  child: Text('Error loading favorites'),
-                ),
-              );
-            }
-          })
+                        );
+                      },
+                      childCount: state.favoriteModel.length,
+                    ),
+                  );
+              }
+            },
+          )
         ],
       ),
     );
