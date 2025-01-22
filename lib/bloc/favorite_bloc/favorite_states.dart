@@ -10,21 +10,22 @@ enum ListStatus {
 
 class FavoriteState extends Equatable {
   final List<FavoriteModel> favoriteModel;
-  final List<FavoriteModel> temperaryList;
+  final List<FavoriteModel> temporaryList;
   final ListStatus listStatus;
   const FavoriteState({
     this.favoriteModel = const [],
     this.listStatus = ListStatus.loading,
-    this.temperaryList = const [],
+    this.temporaryList = const [],
   });
 
-  FavoriteState copyWith({List<FavoriteModel>? favoriteModel, ListStatus? listStatus}) {
+  FavoriteState copyWith({List<FavoriteModel>? favoriteModel, ListStatus? listStatus, List<FavoriteModel>? temporaryList}) {
     return FavoriteState(
       favoriteModel: favoriteModel ?? this.favoriteModel,
       listStatus: listStatus ?? this.listStatus,
+      temporaryList: temporaryList ?? this.temporaryList,
     );
   }
 
   @override
-  List<Object?> get props => [favoriteModel, listStatus, temperaryList];
+  List<Object?> get props => [favoriteModel, listStatus, temporaryList];
 }

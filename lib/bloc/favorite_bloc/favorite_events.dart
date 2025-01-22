@@ -16,3 +16,20 @@ class AddFavorite extends FavoriteEvent {
 
   const AddFavorite({required this.favoriteItem});
 }
+
+//this is the select event where we select the item from the list
+class SelectItem extends FavoriteEvent {
+  final FavoriteModel item;
+  const SelectItem({required this.item});
+}
+
+//this is the unselect event where we unselect the item from the list
+class UnSelectItem extends FavoriteEvent {
+  final FavoriteModel item;
+  const UnSelectItem({required this.item});
+}
+
+//this is the delte event where we delet the item form the list
+class DeleteItem extends FavoriteEvent {
+
+}

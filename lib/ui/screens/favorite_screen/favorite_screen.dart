@@ -1,6 +1,7 @@
 import 'package:bloc_counter_app/bloc/favorite_bloc/favorite_bloc.dart';
 import 'package:bloc_counter_app/bloc/favorite_bloc/favorite_states.dart';
 import 'package:bloc_counter_app/models/favorite_model/favorite_model.dart';
+import 'package:bloc_counter_app/ui/screens/favorite_screen/wudgets/delete_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,16 +68,25 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search favorites...',
-                                prefixIcon: Icon(Icons.search),
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 10,
+                            child: Row(
+                              children: [
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: const TextField(
+                                    decoration: InputDecoration(
+                                      hintText: 'Search favorites...',
+                                      prefixIcon: Icon(Icons.search),
+                                      border: InputBorder.none,
+                                      contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 10,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                DeleteWidgets(),
+                                SizedBox(width: 10),
+                              ],
                             ),
                           )
                         : const Text(
@@ -99,8 +109,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             height: isCollapsed ? 0 : 50,
                             margin: EdgeInsets.only(
                               bottom: isCollapsed ? 0 : 16,
-                              left: 16,
-                              right: 16,
+                              left: 10,
+                              right: 10,
                             ),
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -108,16 +118,23 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                             ),
                             child: isCollapsed
                                 ? const SizedBox.shrink()
-                                : const TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Search favorites...',
-                                      prefixIcon: Icon(Icons.search),
-                                      border: InputBorder.none,
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                        vertical: 15,
+                                : Row(
+                                    children: [
+                                      Expanded(
+                                        child: const TextField(
+                                          decoration: InputDecoration(
+                                            hintText: 'Search favorites...',
+                                            prefixIcon: Icon(Icons.search),
+                                            border: InputBorder.none,
+                                            contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 20,
+                                              vertical: 15,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      DeleteWidgets(),
+                                    ],
                                   ),
                           ),
                         ],
@@ -148,12 +165,16 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       elevation: 2,
                       child: ListTile(
                         contentPadding: const EdgeInsets.all(16),
-                        leading: CircleAvatar(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          child: Text(
-                            '',
-                            style: const TextStyle(color: Colors.white),
-                          ),
+                        leading: Checkbox(
+                          value: state.temporaryList.contains(state.favoriteModel[index]) ? true : false,
+                          onChanged: (bool? value) {
+                            FavoriteModel item = state.favoriteModel[index];
+                            if (value!) {
+                              context.read<FavoriteBloc>().add(SelectItem(item: item));
+                            } else {
+                              context.read<FavoriteBloc>().add(UnSelectItem(item: item));
+                            }
+                          },
                         ),
                         title: Text(
                           favoriteItems.value,
@@ -170,8 +191,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           onPressed: () {
                             FavoriteModel item = state.favoriteModel[index];
                             context.read<FavoriteBloc>().add(
-                              AddFavorite(favoriteItem: FavoriteModel(id: item.id, value: item.value, isFavorite: item.isFavorite ? false : true)),
-                            );
+                                  AddFavorite(
+                                    favoriteItem: FavoriteModel(id: item.id, value: item.value, isFavorite: item.isFavorite ? false : true),
+                                  ),
+                                );
                           },
                         ),
                       ),
