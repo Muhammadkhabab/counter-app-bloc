@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:svg_flutter/svg.dart';
-
 import '../../../bloc/core/colors.dart';
 import '../../../bloc/core/text_styles.dart';
 import '../../../widgets/custom_text_fields.dart';
